@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using TMPro;
@@ -18,7 +17,6 @@ public class ButtonHover : MonoBehaviour
 
     public void OnMouseOver()
     {
-        Debug.Log("Here");
         descriptionText.text = description;
     }
 

@@ -31,4 +31,10 @@ public class Spawn : MonoBehaviour
             clone.SetActive(true);
         }
     }
+
+    public void CreateBuilding(string id)
+    {
+        GameObject initialClone = worldCenter.GetComponent<ClickManager>().selected[0].transform.Find(id).gameObject;
+        Instantiate(initialClone).SetActive(true);
+    }
 }

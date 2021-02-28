@@ -63,6 +63,11 @@ public class ClickManager : MonoBehaviour
                 }
             }
         }
+        foreach (GameObject g in selected)
+        {
+            if (!g.activeSelf)
+                selected.Remove(g);
+        }
     }
 
     void flush()

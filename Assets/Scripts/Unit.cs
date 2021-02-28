@@ -45,7 +45,10 @@ public class Unit : MonoBehaviour
 				float distance = Vector3.Distance(transform.position, enemy.transform.position);
 				if (distance < attackRange && !attacking)
 					StartCoroutine( Attack(enemy.transform.gameObject));
-				GoToClick(enemy.gameObject.transform.position);
+				if (enemy.transform.gameObject.activeSelf && !attacking)
+				{
+					GoToClick(enemy.gameObject.transform.position);
+				}
 			}
 		}
 		 if (currentHealth < maxHealth)
@@ -89,7 +92,8 @@ public class Unit : MonoBehaviour
 
 	public void GoToClick(Vector3 target)
 	{
-		PathRequestManager.RequestPath(transform.position, target, OnPathFound);
+		if (!attacking)
+			PathRequestManager.RequestPath(transform.position, target, OnPathFound);
 	}
 
 	public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -98,8 +102,11 @@ public class Unit : MonoBehaviour
 		{
 			path = newPath;
 			targetIndex = 0;
-			StopCoroutine("FollowPath");
-			StartCoroutine("FollowPath");
+			if (gameObject.activeSelf)
+			{
+				StopCoroutine("FollowPath");
+				StartCoroutine("FollowPath");
+			}
 		}
 	}
 
